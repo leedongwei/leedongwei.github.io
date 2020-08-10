@@ -1,14 +1,19 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
+    title: `Danny Lee`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `Danny Lee`,
+      summary: `software engineer by day, climber by night. always down for coffee.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
+    description: `Danny Lee`,
+    siteUrl: `https://danny.dongwei.li`,
     social: {
-      twitter: `kylemathews`,
+      email: 'danny@dongwei.li',
+      github: 'leedongwei',
+      instagram: `dongweeei`,
+      linkedin: 'leedongwei',
+      strava: 'dongweeei',
+      twitter: `dongweeei`,
     },
   },
   plugins: [
@@ -50,6 +55,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-typescript`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
@@ -60,13 +66,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `Danny Lee`,
+        short_name: `Danny Lee`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/favicon.svg`,
       },
     },
     `gatsby-plugin-react-helmet`,
@@ -80,4 +86,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};
