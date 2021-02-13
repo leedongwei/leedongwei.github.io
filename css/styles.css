@@ -40,6 +40,20 @@ a:active {
   margin: 0 auto;
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+}
+.header div {
+  flex-grow: 1
+}
+.header img.profile-pic {
+  width: 150px;
+  height: 150px;
+  margin-left: -20px;
+}
+
+
 .contact-links {
   margin: 0 0 8px;
   padding: 0;
