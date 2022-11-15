@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Sentry.io JS Ingestion Tester</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="" />
+
+  <link rel="stylesheet" href="../css/normalize.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .input-wrapper input {
+      width: 100%;
+    }
+
+  </style>
+
+  <meta name="theme-color" content="#fafafa" />
+</head>
+
+<body>
+  <article id="main">
+    <h1>Sentry.io JS Ingestion Tester</h1>
+
+    <ul>
+      <li>Send lots of JavaScript traffic to a Sentry project!</li>
+      <li>You will need to turn off adblockers for this to work.</strong></li>
+      <li>If you are using a paid account on production, <strong>this will cost real money!</strong></li>
+    </ul>
+    <ul>
+      <li>Open the JS console (Cmd + Option + J on Chrome).</li>
+      <li>Events are sent synchronously with 200ms delay between them.</li>
+      <li>It may take up to a minute for traffic to show up on the Sentry UI.</li>
+    </ul>
+
+    <h2>DSN</h2>
+    <ul>
+      <li>
+        <a href="https://docs.sentry.io/product/sentry-basics/dsn-explainer/#where-to-find-your-dsn" target="_blank">
+          Doc to finding your DSN
+        </a>
+      </li>
+    </ul>
+
+    <div class="input-wrapper">
+      <input id="dsn-input" type="text" value="">
+    </div>
+    <input type="button" onclick="updateSentryDsn()" value="Update">
+
+    <h2>Send Errors</h2>
+    <input type="button" value="Send 1" onclick="sendError()">
+    <input type="button" value="Send 10" onclick="sendEvents(10, 'errors')">
+    <input type="button" value="Send 50" onclick="sendEvents(100, 'errors')">
+    <input type="button" value="Send 100" onclick="sendEvents(100, 'errors')">
+    <input type="button" value="Send 500" onclick="sendEvents(100, 'errors')">
+    <input type="button" value="Send 1,000" onclick="sendEvents(1000, 'errors')">
+    <input type="button" value="Send 5,000" onclick="sendEvents(1000, 'errors')">
+    <input type="button" value="Send 10,000" onclick="sendEvents(10000, 'errors')">
+
+    <h2>Send Transactions</h2>
+    <input type="button" value="Send 1" onclick="sendTransaction()">
+    <input type="button" value="Send 10" onclick="sendEvents(10, 'transactions')">
+    <input type="button" value="Send 50" onclick="sendEvents(10, 'transactions')">
+    <input type="button" value="Send 100" onclick="sendEvents(100, 'transactions')">
+    <input type="button" value="Send 500" onclick="sendEvents(100, 'transactions')">
+    <input type="button" value="Send 1,000" onclick="sendEvents(1000, 'transactions')">
+    <input type="button" value="Send 5,000" onclick="sendEvents(1000, 'transactions')">
+    <input type="button" value="Send 10,000" onclick="sendEvents(10000, 'transactions')">
+
+
+    <span id="ts"></span>
+  </article>
+
+
+  <script src="https://browser.sentry-cdn.com/7.19.0/bundle.tracing.min.js"
+    integrity="sha384-/5wvZY/tU3sTQwAlcsIlA6t/dQDznm9XHSTNV8z7E+XGFMMd0IgG86MwrOky6FV+"
+    crossorigin="anonymous"></script>
+
+  <script src="./js/scripts.js"></script>
+</body>
+
+</html>
