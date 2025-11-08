@@ -1,0 +1,35 @@
+---
+layout: default
+title: Archive
+permalink: /archive/
+---
+
+<main id="main">
+  {% include header.html %}
+
+  <section>
+    <h2>Archive</h2>
+    
+    {% assign tags = site.posts | map: 'tags' | join: ',' | split: ',' | uniq | sort %}
+    
+    {% for tag in tags %}
+      {% if tag != "" %}
+        <h3 id="tag-{{ tag | slugify }}">#{{ tag }}</h3>
+        <ul class="list-links">
+          {% for post in site.posts %}
+            {% if post.tags contains tag %}
+              <li>
+                <span class="post">{{ post.date | date: "%Y %b %d" }} -</span>
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endfor %}
+  </section>
+
+  <section>
+    <p><a href="{{ '/' | relative_url }}">&larr; Back to home</a></p>
+  </section>
+</main>

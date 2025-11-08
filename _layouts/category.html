@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<main id="main">
+  {% include header.html %}
+  
+  <section>
+    <h1>Category: {{ page.category }}</h1>
+    <p>Posts in this category:</p>
+    
+    <ul>
+      {% for post in site.categories[page.category] %}
+        <li>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+    
+    <p><a href="{{ '/' | relative_url }}">&larr; Back to home</a></p>
+  </section>
+</main>

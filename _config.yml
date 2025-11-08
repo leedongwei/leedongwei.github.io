@@ -1,0 +1,32 @@
+title: Danny Lee
+description: 
+url: https://danny.dongwei.li
+baseurl: ""
+
+markdown: kramdown
+highlighter: rouge
+permalink: /blog/:year/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author: Danny Lee
+
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:title/

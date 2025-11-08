@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+  <meta property="og:image" content="{{ site.url }}/assets/danny-lee.png" />
+
+  <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}" />
+  <link rel="shortcut icon" href="{{ '/favicon.ico' | relative_url }}" />
+  <link rel="apple-touch-icon" href="{{ '/favicon.png' | relative_url }}" />
+
+  <link rel="stylesheet" href="{{ '/css/normalize.css' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/css/styles.css' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/css/syntax.css' | relative_url }}" />
+
+  <meta name="theme-color" content="#fafafa" />
+</head>
+
+<body>
+  {{ content }}
+
+  <script src="{{ '/js/scripts.js' | relative_url }}"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-51493958-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+    gtag("config", "UA-51493958-1");
+  </script>
+</body>
+
+</html>

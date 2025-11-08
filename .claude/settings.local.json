@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(cp:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(make:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(pnpm:*)",
+      "mcp__ide__getDiagnostics",
+      "WebFetch(domain:docs.claude.com)",
+      "WebFetch(domain:nextjs.org)",
+      "WebFetch(domain:nodejs.org)",
+      "WebFetch(domain:orm.drizzle.team)",
+      "WebFetch(domain:postgresql.org)",
+      "WebFetch(domain:npmjs.com)",
+      "WebFetch(domain:react.dev)",
+      "WebFetch(domain:redis.io)",
+      "WebFetch(domain:typescriptlang.org)",
+      "WebFetch(domain:zod.dev)"
+    ],
+    "deny": [],
+    "ask": ["Bash(git:*)", "Bash(rm:*)", "Bash(sudo:*)"]
+  }
+}

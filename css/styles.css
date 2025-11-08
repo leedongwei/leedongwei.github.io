@@ -7,13 +7,20 @@ body {
 
   font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI,
     Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+
+  background: #fafafa;
 }
 
 article {
-  padding: 12px;
+  padding: 12px 0;
 }
-section {
-  margin-bottom: 64px;
+section,
+article {
+  margin-bottom: 48px;
+}
+section:last-child,
+article:last-child {
+  margin-bottom: 0px;
 }
 
 h1,
@@ -26,9 +33,12 @@ h4 {
   font-weight: 600;
 }
 
-a,
-a:visited {
+a {
   color: #2ec4b6;
+  text-decoration: none;
+}
+a:visited {
+  color: #1e94b6;
 }
 a:hover,
 a:active {
@@ -36,12 +46,21 @@ a:active {
 }
 
 #main {
-  max-width: 420px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  
   margin: 0 auto;
+  padding: 24px 0;
+
+  color: #333;
+  line-height: 1.6;
 }
 
 .header {
   display: flex;
+  width: 100%;
   flex-direction: row;
 }
 .header div {
@@ -53,10 +72,20 @@ a:active {
   margin-left: -20px;
 }
 
-
-.contact-links {
+.list-links {
   margin: 0 0 8px;
   padding: 0;
 
   list-style-type: none;
+}
+
+.post .header {
+  padding-bottom: 12px;
+  margin-bottom: 0px;
+}
+.post article {
+  margin-bottom: 32px;
+}
+.post-meta {
+  margin-bottom: 32px;
 }
