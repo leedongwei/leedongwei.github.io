@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Will you be my Valentine?</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffe6f0, #fff0f5, #ffe6ea);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    #bubble-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      overflow: hidden;
+      animation: bubble-expand 4s ease-in-out forwards;
+    }
+
+    .bubble img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    @keyframes bubble-expand {
+      0%   { transform: scale(0);   opacity: 0; }
+      20%  { transform: scale(0.8); opacity: 0.8; }
+      50%  { transform: scale(1);   opacity: 0.7; }
+      80%  { transform: scale(1.3); opacity: 0.3; }
+      100% { transform: scale(1.3); opacity: 0; }
+    }
+
+    #main-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 90vw;
+      min-height: 550px;
+      padding: 2rem 1rem;
+    }
+
+    #couple-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid #e91e63;
+      box-shadow: 0 4px 20px rgba(233, 30, 99, 0.3);
+      margin-bottom: 1.5rem;
+      background: #fff0f5;
+    }
+
+    #couple-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h1 {
+      color: #c2185b;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      margin-bottom: 2rem;
+      line-height: 1.3;
+      text-shadow: 0 2px 4px rgba(194, 24, 91, 0.15);
+    }
+
+    #button-row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .btn {
+      padding: 1rem 2.5rem;
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      color: #fff;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      min-width: 140px;
+    }
+
+    .btn:hover { transform: scale(1.05); }
+    .btn:active { transform: scale(0.98); }
+
+    #btn-yes {
+      background: linear-gradient(135deg, #e91e63, #c2185b);
+      box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+    }
+
+    #btn-yes:hover {
+      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.6);
+    }
+
+    #btn-no {
+      background: linear-gradient(135deg, #e0e0e0, #bdbdbd);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      color: #555;
+    }
+
+    #btn-no:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    #btn-no.fixed-dodge {
+      position: fixed;
+      z-index: 100;
+      transition: left 0.4s ease, top 0.4s ease;
+    }
+
+    #result-message {
+      color: #c2185b;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      margin-top: 1rem;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      display: none;
+    }
+
+    @keyframes bounce-up {
+      0%   { transform: translateY(0); }
+      30%  { transform: translateY(-20px); }
+      60%  { transform: translateY(0); }
+      80%  { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
+
+    .bounce { animation: bounce-up 0.4s ease-out; }
+
+    #btn-reset {
+      margin-top: 1.5rem;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.85rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      border: 1px solid #f8bbd0;
+      border-radius: 20px;
+      background: #fce4ec;
+      color: #b0738a;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.5s ease, background 0.2s ease;
+    }
+
+    #btn-reset:hover {
+      color: #c2185b;
+      border-color: #e91e63;
+      background: #f8bbd0;
+    }
+  </style>
+</head>
+<body>
+  <div id="bubble-container"></div>
+
+  <div id="main-content">
+    <div id="couple-photo">
+      <img alt="Us" src="t-1.png">
+    </div>
+
+    <h1>Will you be my Valentine?</h1>
+
+    <div id="button-row">
+      <button id="btn-yes" class="btn">Yes!</button>
+      <button id="btn-no" class="btn">No</button>
+    </div>
+
+    <div id="result-message"></div>
+    <button id="btn-reset" style="display:none;">i changed my mind</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <script>
+    (function() {
+      var allFaces = [
+        'd-1.JPG',
+        'd-2.JPG',
+        'd-3.png',
+        'd-4.JPG',
+        's-1.JPG',
+        's-2.png',
+        's-3.png',
+        't-2.png',
+        't-3.png',
+        't-4.JPG',
+        't-5.JPG',
+      ];
+
+      // === DOM References (cached once) ===
+      var els = {
+        bubbles:    document.getElementById('bubble-container'),
+        photo:      document.getElementById('couple-photo'),
+        heading:    document.querySelector('h1'),
+        buttonRow:  document.getElementById('button-row'),
+        btnYes:     document.getElementById('btn-yes'),
+        btnNo:      document.getElementById('btn-no'),
+        subtitle:   document.getElementById('result-message'),
+        resetBtn:   document.getElementById('btn-reset')
+      };
+
+      // === App State ===
+      var state = {
+        phase: 'asking',   // 'asking' | 'dodging' | 'accepted'
+        noClicks: 0,
+        lastNoPos: { x: -1, y: -1 },
+        placeholder: null,
+        bubbleInterval: null,
+        bubbleDuration: 4,
+        bubbleSpawnRate: 800
+      };
+
+      // === Bubble System ===
+      function spawnBubble() {
+        var bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        bubble.style.animationDuration = state.bubbleDuration + 's';
+
+        var size = 40 + Math.random() * 80;
+        bubble.style.width = size + 'px';
+        bubble.style.height = size + 'px';
+        bubble.style.left = Math.random() * (window.innerWidth - size) + 'px';
+        bubble.style.top = Math.random() * (window.innerHeight - size) + 'px';
+
+        var img = document.createElement('img');
+        img.src = allFaces[Math.floor(Math.random() * allFaces.length)];
+        img.alt = '';
+        bubble.appendChild(img);
+        els.bubbles.appendChild(bubble);
+
+        bubble.addEventListener('animationend', function() {
+          bubble.remove();
+        }, { once: true });
+      }
+
+      function setBubbleRate(duration, rate) {
+        state.bubbleDuration = duration;
+        state.bubbleSpawnRate = rate;
+        if (state.bubbleInterval) clearInterval(state.bubbleInterval);
+        state.bubbleInterval = setInterval(spawnBubble, rate);
+      }
+
+      // Initial bubbles
+      for (var i = 0; i < 5; i++) setTimeout(spawnBubble, i * 150);
+      setBubbleRate(4, 800);
+
+      // === Confetti ===
+      function fireHeartConfetti() {
+        if (typeof confetti === 'undefined') return;
+
+        var colors = ['#e91e63', '#f44336', '#ff5252', '#ff80ab', '#ff1744'];
+        var heartShape;
+        try { heartShape = confetti.shapeFromText({ text: '\u2764\uFE0F', scalar: 2 }); }
+        catch (e) { heartShape = null; }
+        var shapes = heartShape ? [heartShape] : ['circle'];
+        var scalar = heartShape ? 2 : 1;
+
+        for (var i = 0; i < 4; i++) {
+          (function(delay) {
+            setTimeout(function() {
+              confetti({ particleCount: 50, spread: 80, startVelocity: 30,
+                origin: { x: Math.random(), y: Math.random() * 0.5 },
+                colors: colors, shapes: shapes, scalar: scalar, ticks: 200 });
+            }, delay);
+          })(i * 300);
+        }
+
+        var rainEnd = Date.now() + 3000;
+        var rainInterval = setInterval(function() {
+          if (Date.now() > rainEnd) { clearInterval(rainInterval); return; }
+          confetti({ particleCount: 5, spread: 160, startVelocity: 15,
+            origin: { x: Math.random(), y: -0.1 },
+            colors: colors, shapes: shapes, scalar: scalar, gravity: 0.6, ticks: 300 });
+        }, 150);
+      }
+
+      // === Bounce Animation Helper ===
+      function bounce(el) {
+        el.classList.add('bounce');
+        el.addEventListener('animationend', function() { el.classList.remove('bounce'); }, { once: true });
+      }
+
+      // === State Transitions ===
+      function transitionTo(phase) {
+        state.phase = phase;
+
+        if (phase === 'asking') {
+          // Heading
+          els.heading.textContent = 'Will you be my Valentine?';
+          els.heading.style.fontSize = '';
+
+          // Show button row
+          els.buttonRow.style.display = '';
+          els.buttonRow.style.opacity = '1';
+
+          // Clean up any leftover No button (original, converted, or placeholder)
+          var oldNo = document.getElementById('btn-no');
+          if (oldNo) oldNo.remove();
+          var oldConverted = document.getElementById('btn-no-converted');
+          if (oldConverted) oldConverted.remove();
+          if (state.placeholder) {
+            state.placeholder.remove();
+            state.placeholder = null;
+          }
+
+          // Recreate fresh No button
+          els.btnNo = document.createElement('button');
+          els.btnNo.id = 'btn-no';
+          els.btnNo.className = 'btn';
+          els.btnNo.textContent = 'No';
+          els.btnNo.addEventListener('click', onNoClick);
+          els.buttonRow.appendChild(els.btnNo);
+
+          // Reset No click state
+          state.noClicks = 0;
+          state.lastNoPos = { x: -1, y: -1 };
+
+          // Hide subtitle and reset button
+          els.subtitle.style.opacity = '0';
+          els.subtitle.style.display = 'none';
+          els.subtitle.textContent = '';
+          els.resetBtn.style.opacity = '0';
+          setTimeout(function() { els.resetBtn.style.display = 'none'; }, 500);
+
+          // Normal bubble speed
+          setBubbleRate(4, 800);
+
+        } else if (phase === 'accepted') {
+          // Bounce photo and heading
+          bounce(els.photo);
+          bounce(els.heading);
+
+          // Update heading
+          els.heading.textContent = 'You are my Valentine!';
+          els.heading.style.fontSize = 'clamp(2rem, 6vw, 3.5rem)';
+
+          // Fade out buttons
+          els.buttonRow.style.opacity = '0';
+          setTimeout(function() { els.buttonRow.style.display = 'none'; }, 500);
+
+          // Hide dodging No button if it exists
+          if (els.btnNo.classList.contains('fixed-dodge')) {
+            els.btnNo.style.display = 'none';
+          }
+
+          // Speed up bubbles
+          setBubbleRate(1, 150);
+
+          // Show subtitle
+          els.subtitle.textContent = 'but would you still love me if i was a worm?';
+          els.subtitle.style.display = 'block';
+          setTimeout(function() { els.subtitle.style.opacity = '1'; }, 800);
+
+          // Show reset button
+          els.resetBtn.style.display = '';
+          setTimeout(function() { els.resetBtn.style.opacity = '1'; }, 1200);
+
+          // Fire confetti
+          fireHeartConfetti();
+        }
+      }
+
+      // === Button Handlers ===
+      function onYesClick() {
+        transitionTo('accepted');
+      }
+
+      function getViewport() {
+        // visualViewport is more accurate on mobile (accounts for address bar, pinch zoom)
+        var vv = window.visualViewport;
+        return {
+          w: vv ? vv.width : window.innerWidth,
+          h: vv ? vv.height : window.innerHeight,
+          x: vv ? vv.offsetLeft : 0,
+          y: vv ? vv.offsetTop : 0
+        };
+      }
+
+      function getRandomPosition(btnW, btnH) {
+        var vp = getViewport();
+        var margin = 20;
+        var maxAttempts = 20;
+        var minDist = Math.min(vp.w, vp.h) * 0.2; // scale to screen size
+        var newX, newY, attempts = 0;
+        do {
+          newX = vp.x + margin + Math.random() * (vp.w - btnW - margin * 2);
+          newY = vp.y + margin + Math.random() * (vp.h - btnH - margin * 2);
+          attempts++;
+        } while (
+          attempts < maxAttempts &&
+          Math.abs(newX - state.lastNoPos.x) < minDist &&
+          Math.abs(newY - state.lastNoPos.y) < minDist
+        );
+        state.lastNoPos = { x: newX, y: newY };
+        return { x: newX, y: newY };
+      }
+
+      function onNoClick() {
+        state.noClicks++;
+        var btn = els.btnNo;
+        var btnW = btn.offsetWidth;
+        var btnH = btn.offsetHeight;
+
+        if (state.noClicks < 3) {
+          // Dodge: first click sets up fixed positioning
+          if (state.noClicks === 1) {
+            state.phase = 'dodging';
+
+            // Capture position BEFORE any DOM changes
+            var rect = btn.getBoundingClientRect();
+
+            state.placeholder = document.createElement('div');
+            state.placeholder.style.cssText = 'width:' + btnW + 'px;height:' + btnH + 'px;visibility:hidden;';
+            els.buttonRow.insertBefore(state.placeholder, btn);
+
+            // Snap to captured position with no transition
+            btn.style.transition = 'none';
+            btn.classList.add('fixed-dodge');
+            btn.style.left = rect.left + 'px';
+            btn.style.top = rect.top + 'px';
+            btn.offsetLeft; // force reflow before re-enabling transition
+            btn.style.transition = '';
+          }
+
+          var pos = getRandomPosition(btnW, btnH);
+          btn.style.left = pos.x + 'px';
+          btn.style.top = pos.y + 'px';
+
+        } else {
+          // 3rd click: animate back to original position, then convert
+          var placeholderRect = state.placeholder.getBoundingClientRect();
+          btn.style.left = placeholderRect.left + 'px';
+          btn.style.top = placeholderRect.top + 'px';
+          btn.style.pointerEvents = 'none';
+
+          btn.addEventListener('transitionend', function() {
+            // Remove fixed positioning
+            btn.classList.remove('fixed-dodge');
+            btn.style.cssText = '';
+
+            // Remove placeholder
+            if (state.placeholder) {
+              state.placeholder.remove();
+              state.placeholder = null;
+            }
+
+            // Convert to Yes button
+            btn.textContent = 'Yes!';
+            btn.id = 'btn-no-converted';
+            btn.style.background = 'linear-gradient(135deg, #e91e63, #c2185b)';
+            btn.style.boxShadow = '0 4px 15px rgba(233, 30, 99, 0.4)';
+            btn.style.color = '#fff';
+
+            // Swap handler: remove No click, add Yes click
+            btn.removeEventListener('click', onNoClick);
+            btn.addEventListener('click', onYesClick);
+          }, { once: true });
+        }
+      }
+
+      // === Wire Up Events ===
+      els.btnYes.addEventListener('click', onYesClick);
+      els.btnNo.addEventListener('click', onNoClick);
+      els.resetBtn.addEventListener('click', function() { transitionTo('asking'); });
+    })();
+  </script>
+</body>
+</html>
